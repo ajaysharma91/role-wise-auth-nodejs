@@ -161,7 +161,7 @@ router.post("/api/admin/register", ResisterValidation, ValidateMiddleware, async
  * @type GET
  * 
  */
-router.post('/api/user/remove', async (req, res, next) => {
+router.post('/user/remove', async (req, res, next) => {
     await User.collection.deleteMany().then(response => {
         res.json({
             success: true,
@@ -201,13 +201,13 @@ router.post('/api/user/remove', async (req, res, next) => {
 
 /**
  * @description To Login User
- * @api DOMAIN/v1/api/user-login
+ * @api /v1/api/user-login
  * @author Ajay sharma
  * @access Public
  * @type POST
  * 
  */
-router.post('/api/user-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
+router.post('/user-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
     try{
         let {username,password} = req.body
         let user = await User.findOne({username})
@@ -246,13 +246,13 @@ router.post('/api/user-login',AuthenteValidations,ValidateMiddleware,async(req,r
 
 /**
  * @description To Login Admin
- * @api DOMAIN/v1/api/admin-login
+ * @api /v1/api/admin-login
  * @author Ajay sharma
  * @access Public
  * @type POST
  * 
  */
- router.post('/api/admin-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
+ router.post('/admin-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
     try{
         let {username,password} = req.body
         let user = await User.findOne({username})
@@ -290,13 +290,13 @@ router.post('/api/user-login',AuthenteValidations,ValidateMiddleware,async(req,r
 
 /**
  * @description To Login Owner
- * @api DOMAIN/v1/api/admin-login
+ * @api /v1/api/admin-login
  * @author Ajay sharma
  * @access Public
  * @type POST
  * 
  */
- router.post('/api/owner-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
+ router.post('/owner-login',AuthenteValidations,ValidateMiddleware,async(req,res)=>{
     try{
         let {username,password} = req.body
         let user = await User.findOne({username})
@@ -334,14 +334,14 @@ router.post('/api/user-login',AuthenteValidations,ValidateMiddleware,async(req,r
 
 /**
  * @description To Profile Me by token
- * @api /api/profile 
+ * @api v1/api/profile 
  * @author Ajay sharma
  * @access Private
  * @type GET
  * 
  */
 
- router.get('/api/profile',userAuth, async(req,res)=>{
+ router.get('/profile',userAuth, async(req,res)=>{
     return res.status(200).json({
         success:true,
         user:req.user
@@ -350,14 +350,14 @@ router.post('/api/user-login',AuthenteValidations,ValidateMiddleware,async(req,r
 
 /**
  * @description To Access For User
- * @api /api/user-access
+ * @api v1/api/user-access
  * @author Ajay sharma
  * @access Private
  * @type GET
  * 
  */
 
-router.get('/api/user-access',userAuth,rolesValidate(['user','owner']), async(req,res)=>{
+router.get('/user-access',userAuth,rolesValidate(['user','owner']), async(req,res)=>{
     return res.status(200).json({
         success:true,
         user:req.user
@@ -365,14 +365,14 @@ router.get('/api/user-access',userAuth,rolesValidate(['user','owner']), async(re
 })
 /**
  * @description To Access For Admin
- * @api /api/admin-access
+ * @api v1/api/admin-access
  * @author Ajay sharma
  * @access Private
  * @type GET
  * 
  */
 
- router.get('/api/admin-access',userAuth,rolesValidate(['admin','owner']), async(req,res)=>{
+ router.get('/admin-access',userAuth,rolesValidate(['admin','owner']), async(req,res)=>{
     return res.status(200).json({
         success:true,
         user:req.user
@@ -380,14 +380,14 @@ router.get('/api/user-access',userAuth,rolesValidate(['user','owner']), async(re
 })
 /**
  * @description To Access For Owner
- * @api /api/owner-access
+ * @api /v1/api/owner-access
  * @author Ajay sharma
  * @access Private
  * @type GET
  * 
  */
 
- router.get('/api/owner-access',userAuth,rolesValidate(['owner']), async(req,res)=>{
+ router.get('/owner-access',userAuth,rolesValidate(['owner']), async(req,res)=>{
     return res.status(200).json({
         success:true,
         user:req.user

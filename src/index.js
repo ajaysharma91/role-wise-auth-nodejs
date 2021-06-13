@@ -23,7 +23,7 @@ app.use(cors())
 app.use(json())
 app.use(passport.initialize())
 
-app.use('/v1',userApis)
+app.use('/v1/api',userApis)
 
 const main = async() => {
     console.log("AJAY")
